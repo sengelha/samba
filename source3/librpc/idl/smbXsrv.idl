@@ -340,6 +340,7 @@ interface smbXsrv
 		uint32					tcon_wire_id;
 		server_id				server_id;
 		NTTIME					creation_time;
+		[charset(UTF8),string] char		in_path[];
 		[charset(UTF8),string] char		share_name[];
 		smbXsrv_encrpytion_flags		encryption_flags;
 		/*

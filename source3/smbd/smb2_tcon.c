@@ -328,6 +328,12 @@ static NTSTATUS smbd_smb2_tree_connect(struct smbd_smb2_request *req,
 		tcon->global->encryption_flags |= SMBXSRV_ENCRYPTION_REQUIRED;
 	}
 
+	tcon->global->in_path = talloc_strdup(tcon, in_path);
+	if (!tcon->global->in_path) {
+		TALLOC_FREE(tcon);
+		return NT_STATUS_NO_MEMORY;
+	}
+
 	compat_conn = make_connection_smb2(req,
 					tcon, snum,
 					req->session->compat,
